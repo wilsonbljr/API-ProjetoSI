@@ -29,10 +29,10 @@ public class ListaPersonalizada implements Serializable {
 	@JsonView(Views.External.class)
 	private long id;
 	
-	@JsonView(Views.Internal.class)
+	@JsonView(Views.External.class)
 	private String nome;
 	
-	@JsonView(Views.Internal.class)
+	@JsonView(Views.External.class)
 	private String descricao;
 	
 	

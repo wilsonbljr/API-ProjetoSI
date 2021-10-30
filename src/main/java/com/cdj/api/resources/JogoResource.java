@@ -1,5 +1,7 @@
 package com.cdj.api.resources;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cdj.api.models.Jogo;
@@ -33,8 +36,12 @@ public class JogoResource {
 	
 	@GetMapping("/jogos")
 	@JsonView(Views.Internal.class)
-	public Page<Jogo> listaJogos(Pageable pageable){
-		return jogoRepository.findAll(pageable);
+	public Page<Jogo> listaJogos(@RequestParam(required = false) String titulo, @RequestParam(required = false) List<Long> temaid, 
+			@RequestParam(required = false) List<Long> generoid,
+			@RequestParam(required = false) List<Long> publisherid, @RequestParam(required = false) List<Long> developerid, 
+			@RequestParam(required = false) List<Long> plataformaid, Pageable pageable) {
+		return jogoRepository.pesquisaJogo(titulo, 
+				temaid, generoid, publisherid, developerid, plataformaid, pageable);
 	}
 	
 	@GetMapping("/jogos/{id}")
@@ -66,7 +73,6 @@ public class JogoResource {
 		}
 	}
 	
-
 	@GetMapping("/jogos/{id}/scores")
 	@JsonView(Views.External.class)
 	public Page<Score> listaScoresByJogo(@PathVariable(value="id") long id, Pageable pageable){ 
@@ -85,4 +91,5 @@ public class JogoResource {
 		Page<Jogo> lista = jogoRepository.findByPlataformaId(id, pageable);
 		return lista;
 	}
+
 }

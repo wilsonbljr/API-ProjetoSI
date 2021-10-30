@@ -70,8 +70,12 @@ public class Jogo implements Serializable {
 	private Developer developer;
 	
 	
-	@ManyToMany(mappedBy="jogos")
+	@ManyToMany
 	@JsonView(Views.Internal.class)
+	@JoinTable(
+			name="jogo_plataforma",
+			joinColumns = @JoinColumn(name = "jogoid"),
+			inverseJoinColumns = @JoinColumn(name = "plataformaid"))
 	private Set<Plataforma> plataforma = new HashSet<>();
 	
 	
@@ -95,7 +99,9 @@ public class Jogo implements Serializable {
 	@OneToMany(mappedBy = "jogo")
 	private Set<Score> scores = new HashSet<>();
 	
-
+	@JsonView(Views.Internal.class)
+	private Double medianota;
+	
 	public long getId() {
 		return id;
 	}
@@ -231,6 +237,16 @@ public class Jogo implements Serializable {
 
 	public void setResumo(String resumo) {
 		this.resumo = resumo;
+	}
+
+
+	public Double getMedianota() {
+		return medianota;
+	}
+
+
+	public void setMedianota(Double medianota) {
+		this.medianota = medianota;
 	}
 	
 	

@@ -27,7 +27,7 @@ public class UsuarioResource {
 	UsuarioRepository usuarioRepository;
 	
 	@GetMapping("/usuarios")
-	@JsonView(Views.External.class)
+	@JsonView(Views.Internal.class)
 	public Page<Usuario> listaUsuarios(Pageable pageable){
 		return usuarioRepository.findAll(pageable);
 	}

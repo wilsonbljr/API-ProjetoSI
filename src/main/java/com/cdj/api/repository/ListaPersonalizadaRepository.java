@@ -13,4 +13,6 @@ public interface ListaPersonalizadaRepository extends JpaRepository<ListaPersona
 	ListaPersonalizada findById(long id);
 	
 	Page<ListaPersonalizada> findByNomeContaining(String nome, Pageable pageable);
+	
+	Page<ListaPersonalizada> findByUsuarioId(long id, Pageable pageable);
 }

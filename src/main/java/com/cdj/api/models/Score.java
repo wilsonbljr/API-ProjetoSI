@@ -57,6 +57,9 @@ public class Score implements Serializable {
 	@OneToMany(mappedBy = "score", cascade=CascadeType.REMOVE, orphanRemoval = true)
 	private Set<Gostei> gostei = new HashSet<>();
 	
+	@JsonView(Views.External.class)
+	private int editado;
+	
 
 	public long getId() {
 		return id;
@@ -115,6 +118,16 @@ public class Score implements Serializable {
 
 	public void setLikes(Set<Gostei> gostei) {
 		this.gostei = gostei;
+	}
+
+
+	public int getEditado() {
+		return editado;
+	}
+
+
+	public void setEditado(int editado) {
+		this.editado = editado;
 	}
 	
 }

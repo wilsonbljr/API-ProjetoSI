@@ -1,67 +1,56 @@
 package com.cdj.api.models;
 
 import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
-@Table(name="review")
-public class Review implements Serializable {
-	
+@Table(name="favorito")
+public class Favorito implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id", unique = true)
-	@JsonView(Views.External.class)
+	@JsonIgnore
 	private long id;
-	
-	@JsonView(Views.External.class)
-	private String review;
-	
-	@JsonView(Views.Internal.class)
-	@OneToOne(mappedBy = "review")
-	private Score score;
-	
+
+	@JsonView(Views.Intermediaria2.class)
+	private long jogoid;
+
+	@JsonView(Views.Intermediaria1.class)
+	private long usuarioid;
 
 	public long getId() {
 		return id;
 	}
 
-
 	public void setId(long id) {
 		this.id = id;
 	}
 
-
-	public String getReview() {
-		return review;
+	public long getJogoid() {
+		return jogoid;
 	}
 
-
-	public void setReview(String review) {
-		this.review = review;
+	public void setJogoid(long jogoid) {
+		this.jogoid = jogoid;
 	}
 
-
-	public Score getScore() {
-		return score;
+	public long getUsuarioid() {
+		return usuarioid;
 	}
 
-
-	public void setScore(Score score) {
-		this.score = score;
+	public void setUsuarioid(long usuarioid) {
+		this.usuarioid = usuarioid;
 	}
-
 	
 }

@@ -28,7 +28,7 @@ public class ListaPersonalizadaResource {
 	ListaPersonalizadaRepository listapersonalizadaRepository;
 	
 	@GetMapping("/listaspersonalizadas")
-	@JsonView(Views.Internal.class)
+	@JsonView(Views.External.class)
 	public Page<ListaPersonalizada> listaListaPersonalizada(@RequestParam(required = false) String nome, Pageable pageable){
 		return (nome) != null ? listapersonalizadaRepository.findByNomeContaining(nome, pageable)
 				: listapersonalizadaRepository.findAll(pageable);
@@ -40,13 +40,17 @@ public class ListaPersonalizadaResource {
 		return listapersonalizadaRepository.findById(id);
 	}
 	
-	@GetMapping("/usuarios/{id}/listaspersonalizadas")
-	
 	@PostMapping("/listaspersonalizadas")
 	@JsonView(Views.Internal.class)
 	public ResponseEntity<ListaPersonalizada> salvaListaPersonalizada(@RequestBody ListaPersonalizada listapersonalizada) {
 		listapersonalizadaRepository.save(listapersonalizada);
 		return new ResponseEntity<ListaPersonalizada>(listapersonalizada, HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/usuarios/{id}/listaspersonalizadas")
+	@JsonView(Views.External.class)
+	public Page<ListaPersonalizada> listaPersonalizadaPorUsuario(@PathVariable(value="id") long id, Pageable pageable) {
+		return listapersonalizadaRepository.findByUsuarioId(id, pageable);
 	}
 	
 	@DeleteMapping("/listaspersonalizadas/{id}")

@@ -34,11 +34,7 @@ public class Plataforma implements Serializable {
 	private String descricao;
 
 	@JsonIgnore
-	@ManyToMany
-	@JoinTable(
-			name="jogo_plataforma",
-			joinColumns = @JoinColumn(name = "plataformaid"),
-			inverseJoinColumns = @JoinColumn(name = "jogoid"))
+	@ManyToMany(mappedBy="plataforma")
 	private Set<Jogo> jogos = new HashSet<>();
 
 

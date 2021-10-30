@@ -12,5 +12,15 @@ public class Views {
 		
 	}
 	
+	public static interface Intermediaria1 {
+		
+	}
 	
+	public static interface Intermediaria2 {
+		
+	}
+	
+	public static class Intermediaria3 implements Intermediaria1, Intermediaria2 {
+		
+	}
 }

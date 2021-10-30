@@ -38,7 +38,7 @@ public class ReviewResource {
 	}
 	
 	
-	@JsonView(Views.Internal.class)
+	@JsonView(Views.External.class)
 	@GetMapping("/reviews/{id}")
 	public Review listaReviewUnica(@PathVariable(value="id") long id) {
 		return reviewRepository.findById(id);
@@ -54,7 +54,11 @@ public class ReviewResource {
 		score.setUsuario(review.getScore().getUsuario());
 		
 		final Review reviewIsolada = new Review();
-		reviewIsolada.setReview(review.getReview());
+		if (review.getReview() != null) {
+			reviewIsolada.setReview(review.getReview());
+		} else {
+			reviewIsolada.setReview("");
+		}
 		
 		if (scoreRepository.findByJogoIdAndUsuarioId(review.getScore().getJogo().getId(), review.getScore().getUsuario().getId()).isEmpty()) {
 			final Review reviewCadastrada = reviewRepository.save(reviewIsolada);
