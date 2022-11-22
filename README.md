@@ -1,4 +1,5 @@
-# API-ProjetoSI
-API Rest em desenvolvimento com Spring (Java) que está sendo utilizada para o projeto final do curso de Análise e Desenvolvimento de Sistemas (Site de Review de Jogos)
+# API for a game review website
 
-README será complementado ao finalizar o projeto.
+REST API developed as the final project of my graduation, made with Spring Boot using gradle.
+
+It features search with filters, authentication (CRUD of users), lists of the user's favorite games and user's reviews for games they already played
